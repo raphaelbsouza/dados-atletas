@@ -4,60 +4,89 @@ class Atleta {
 		this.idade = idade;
 		this.peso = peso;
 		this.altura = altura;
-		this.notas = notas; 
+		this.notas = notas;
 	}
 
 	calculaCategoria(){
 		if (this.idade >= 9 && this.idade <= 11) {
-			console.log("Infantil");
+			return "Infantil";
 		} else if (this.idade >= 12 && this.idade <= 13) {
-			consoleg.log("Juvenil");
+			return "Juvenil";
 		} else if (this.idade >= 14 && this.idade <= 15) {
-			console.log("Intermediário");
+			return "Intermediário";
 		} else if (this.idade >= 16 && this.idade <= 30) {
-			console.log("Adulto");
+			return "Adulto";
 		} else {
-			console.log("Sem categoria");
+			return "Sem categoria";
 		}
 	}
 
 	calculaIMC(){
-
+		return this.peso / (this.altura * this.altura);
 	}
 
-	calculaMediaValida(){
-		let soma = this.notas.reduce((total, nota) => notas + nota,0)
-		return soma / this.notas.length
+	calculaMediaValida() {
+		let soma = 0;
+		let menor = this.notas[0];
+		let maior = this.notas[0];
+
+		for (let i = 0; i < this.notas.length; i++) {
+			let nota = this.notas[i];
+
+			soma += nota;
+
+			if (nota < menor) {
+				menor = nota;
+			}
+
+			if (nota > maior) {
+				maior = nota;
+			}
+		}
+
+		return (soma - menor - maior) / (this.notas.length - 2);
 	}
 
 	obtemNomeAtleta(){
+		return this.nome;
+	}
 
+	obtemIdadeAtleta(){
+		return this.idade;
+	}
+
+	obtemPesoAtleta(){
+		return this.peso;
+	}
+
+	obtemNotasAtleta(){
+		return this.notas;
 	}
 
 	obtemCategoria(){
-
+		return this.calculaCategoria();
 	}
 
 	obtemIMC(){
-
+		return this.calculaIMC();
 	}
 
 	obtemMediaValida(){
-
+		return this.calculaMediaValida();
 	}
 
 	exibirDados(){
-		console.log(`Nome: ${this.nome}`);
-		console.log(`Idade: ${this.idade}`);
-		console.log(`Peso: ${this.peso}`);
+		console.log(`Nome: ${this.obtemNomeAtleta()}`);
+		console.log(`Idade: ${this.obtemIdadeAtleta()}`);
+		console.log(`Peso: ${this.obtemPesoAtleta()}`);
 		console.log(`Altura: ${this.altura}`);
-		console.log(`Notas: ${this.notas}`)
-		console.log(`Categoria: ${this.categoria}`);
-		console.log(`IMC: ${this.imc}`)
-		console.log(`Média Válida: ${this.mediaval}`)
+		console.log(`Notas: ${this.obtemNotasAtleta()}`);
+		console.log(`Categoria: ${this.obtemCategoria()}`);
+		console.log(`IMC: ${this.obtemIMC()}`);
+		console.log(`Média Válida: ${this.obtemMediaValida()}`);
 	}
 }
 
-const atleta = new Atleta("Cesar Abascal",30, 80, 1.70,[10, 9.34, 8.42, 10, 7.88]);
+const atleta = new Atleta("Cesar Abascal",30,	80,	1.70,[10, 9.34, 8.42, 10, 7.88]);
 
-console.log(atleta.exibirDados());
+atleta.exibirDados();
